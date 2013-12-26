@@ -1,6 +1,8 @@
-# kb-controls
+# kb-bindings
 
-expose a polling object for (game) keybindings using [vkey](https://github.com/chrisdickinson/vkey/) definitions.
+Expose a polling object and edge-triggered events for (game) keybindings using [vkey](https://github.com/chrisdickinson/vkey/) definitions.
+
+Based on @chrisdickinson's [kb-controls](https://github.com/chrisdickinson/kb-controls) (should be mostly compatible)
 
 ```javascript
 var kb = require('./index')
@@ -16,6 +18,7 @@ var ctl = kb({
 , 'S': 'backward'
 , 'D': 'strafe_right'
 , '<mouse 1>': 'fire'
+, 'E': 'inventory'
 })
 
 raf(document.body).on('data', function(dt) {
@@ -33,7 +36,7 @@ can use which ever is most convenient for your application (level-triggered or e
 
 ## API
 
-#### kb = require('kb-controls')
+#### kb = require('kb-bindings')
 
 return the `kb` function.
 
@@ -89,6 +92,10 @@ Removes all DOM event listeners and renders the `ctl` inert.
 Emits when the binding state changes to down. Note this event is only emitted when the
 state changes (unlike the DOM keydown event it does _not_ continuously emit as the key
 is held down).
+
+The event name is the binding, for example:
+
+    ctl.down.on('inventory', function() { ... });
 
 #### ctl.up.on(binding, function(){})
 
