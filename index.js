@@ -24,15 +24,17 @@ module.exports = function(el, bindings, state, opts) {
 
   state = state || {}
   
-  state.events = new EventEmitter()
+  state.down = new EventEmitter()
+  state.up = new EventEmitter()
 
   // always initialize the state.
   for(var key in bindings) {
-    if(bindings[key] === 'events' ||
-       bindings[key] === 'enabled' ||
+    if(bindings[key] === 'enabled' ||
        bindings[key] === 'enable' ||
        bindings[key] === 'disable' ||
-       bindings[key] === 'destroy') {
+       bindings[key] === 'destroy' ||
+       bindings[key] === 'down' ||
+       bindings[key] === 'up') {
       throw new Error(bindings[key]+' is reserved')
     }
     state[bindings[key]] = 0
@@ -89,13 +91,19 @@ module.exports = function(el, bindings, state, opts) {
         , binding = bindings[key]
 
       if(binding) {
+        var previous_state = state[binding];
         state[binding] += on_or_off ? max(measured[key]--, 0) : -(measured[key] = 1)
 
         if(!on_or_off && state[binding] < 0) {
           state[binding] = 0
         }
-        
-        state.events.emit('change', binding, state[binding])
+   
+        if (previous_state !== state[binding]) {
+          if (on_or_off)
+            state.down.emit(binding)
+          else
+            state.up.emit(binding)
+        }
       }
     }
   }

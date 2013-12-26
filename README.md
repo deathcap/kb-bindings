@@ -28,7 +28,8 @@ raf(document.body).on('data', function(dt) {
 
 Events are great! I love them. But when you're writing game logic, oftentimes you want the frame event to drive the simulation -- and dealing with the keyboard as a separate evented interface can be troublesome in this regard.
 
-There is actually one event that you you can subscribe to, see `ctl.events.on('change')` below for details.
+This module provides both a polling object and up/down events for each binding, so you
+can use which ever is most convenient for your application (level-triggered or edge-triggered).
 
 ## API
 
@@ -79,9 +80,15 @@ as normal while the `ctl` is disabled.
 
 Removes all DOM event listeners and renders the `ctl` inert.
 
-#### ctl.events.on('change', function(binding, onOff){})
+#### ctl.down.on(binding, function(){})
 
-Emits every time a binding changes between `0` and `1`
+Emits when the binding state changes to down. Note this event is only emitted when the
+state changes (unlike the DOM keydown event it does _not_ continuously emit as the key
+is held down).
+
+#### ctl.up.on(binding, function(){})
+
+Emits when the binding state changes to up.
 
 ## License
 
