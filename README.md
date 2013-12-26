@@ -33,11 +33,11 @@ can use which ever is most convenient for your application (level-triggered or e
 
 ## API
 
-#### kb = require('raf')
+#### kb = require('kb-controls')
 
 return the `kb` function.
 
-#### ctl = kb([DOMElement,] bindings[, augmentObject])
+#### ctl = kb([DOMElement,] bindings[, augmentObject, opts])
 
 Add event listeners to `DOMElement` or `document.body` if not provided.
 
@@ -58,6 +58,10 @@ Bindings is a map of `vkey`'s to desired property names:
 If `augmentObject` is passed, these property names will be attached to it instead
 of a new object.
 
+If `opts` is passed, the following options are understood:
+
+preventDefaults: if true (default), the default browser action for the DOM events will be prevented
+
 #### ctl[yourPropertyName] -> Number
 
 If the number is truthy, that means it's actively being pressed. Otherwise it's not. If it's
@@ -65,7 +69,7 @@ greater than 1, then two different keys may have been bound to the action and ar
 
 #### ctl.enable()
 
-Enables the keyup, keydown, mouseup, and mousedown listeners (and makes them `preventDefault()`.)
+Enables the keyup, keydown, mouseup, mousedown, and contextmenu listeners (and makes them `preventDefault()` if `preventDefaults` is set.)
 
 #### ctl.enabled() -> boolean
 
