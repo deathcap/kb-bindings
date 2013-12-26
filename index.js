@@ -2,7 +2,7 @@ var ever = require('ever')
   , vkey = require('vkey')
   , max = Math.max
 
-module.exports = function(el, bindings, state) {
+module.exports = function(el, bindings, state, opts) {
   var root = null
   if(bindings === undefined || !el.ownerDocument) {
     state = bindings
@@ -17,6 +17,9 @@ module.exports = function(el, bindings, state) {
     , re = root ? ever(root) : ee
     , measured = {}
     , enabled = true
+
+  opts = opts || {}
+  opts.preventDefaults = (opts.preventDefaults === undefined) ? true : opts.preventDefaults
 
   state = state || {}
 
@@ -68,6 +71,7 @@ module.exports = function(el, bindings, state) {
   function wrapped(fn) {
     return function(ev) {
       if(enabled) {
+        if (opts.preventDefaults) ev.preventDefault()
         fn(ev)
       } else {
         return
