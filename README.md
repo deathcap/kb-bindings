@@ -1,6 +1,7 @@
 # kb-bindings
 
 Expose a polling object and edge-triggered events for (game) keybindings using [vkey](https://github.com/chrisdickinson/vkey/) definitions.
+Can be configured in a GUI using the [kb-bindings-ui](https://github.com/deathcap/kb-bindings-ui) module.
 
 Based on @chrisdickinson's [kb-controls](https://github.com/chrisdickinson/kb-controls) (should be mostly compatible)
 
