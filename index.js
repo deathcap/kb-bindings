@@ -27,6 +27,8 @@ module.exports = function(el, bindings, state, opts) {
   state.down = new EventEmitter()
   state.up = new EventEmitter()
 
+  state.bindings = bindings
+
   // always initialize the state.
   for(var key in bindings) {
     if(bindings[key] === 'enabled' ||
@@ -34,7 +36,8 @@ module.exports = function(el, bindings, state, opts) {
        bindings[key] === 'disable' ||
        bindings[key] === 'destroy' ||
        bindings[key] === 'down' ||
-       bindings[key] === 'up') {
+       bindings[key] === 'up' ||
+       bindings[key] === 'bindings') {
       throw new Error(bindings[key]+' is reserved')
     }
     state[bindings[key]] = 0
