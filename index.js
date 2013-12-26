@@ -45,6 +45,9 @@ module.exports = function(el, bindings, state, opts) {
   re.on('keydown', wrapped(onoff(kb, true)))
   ee.on('mouseup', wrapped(onoff(mouse, false)))
   ee.on('mousedown', wrapped(onoff(mouse, true)))
+  ee.on('contextmenu', function(ev) {
+    if (opts.preventDefaults) ev.preventDefault()
+  })
 
   state.enabled = function() {
     return enabled
