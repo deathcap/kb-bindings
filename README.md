@@ -28,12 +28,13 @@ raf(document.body).on('data', function(dt) {
 
 ```
 
-### Why not events?
+See the demo at [http://deathcap.github.io/kb-bindings-ui/](http://deathcap.github.io/kb-bindings-ui/)
 
-Events are great! I love them. But when you're writing game logic, oftentimes you want the frame event to drive the simulation -- and dealing with the keyboard as a separate evented interface can be troublesome in this regard.
+### Why both polling and events?
 
 This module provides both a polling object and up/down events for each binding, so you
-can use which ever is most convenient for your application (level-triggered or edge-triggered).
+can use which ever is most convenient for your application (level-triggered or edge-triggered),
+all with a unified shared set of bindings.
 
 ## API
 
@@ -64,7 +65,7 @@ of a new object.
 
 If `opts` is passed, the following options are understood:
 
-preventDefaults: if true (default), the default browser action for the DOM events will be prevented
+* `preventDefaults`: if true (default), the default browser action for the DOM events will be prevented
 
 #### ctl[yourPropertyName] -> Number
 
@@ -91,10 +92,10 @@ Removes all DOM event listeners and renders the `ctl` inert.
 #### ctl.down.on(binding, function(){})
 
 Emits when the binding state changes to down. Note this event is only emitted when the
-state changes (unlike the DOM keydown event it does _not_ continuously emit as the key
+state changes (unlike the DOM `keydown` event it does _not_ continuously emit as the key
 is held down).
 
-The event name is the binding, for example:
+The event name is the binding name, for example:
 
     ctl.down.on('inventory', function() { ... });
 
