@@ -1,6 +1,6 @@
 {
   "name": "kb-bindings",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "present a polling interface and events for keyboard state given a binding object",
   "main": "index.js",
   "repository": {
