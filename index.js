@@ -26,6 +26,7 @@ module.exports = function(el, bindings, state, opts) {
   
   state.down = new EventEmitter()
   state.up = new EventEmitter()
+  state.changed = new EventEmitter()
 
   state.bindings = bindings
 
@@ -37,6 +38,7 @@ module.exports = function(el, bindings, state, opts) {
        bindings[key] === 'destroy' ||
        bindings[key] === 'down' ||
        bindings[key] === 'up' ||
+       bindings[key] === 'changed' ||
        bindings[key] === 'bindings') {
       throw new Error(bindings[key]+' is reserved')
     }
@@ -109,6 +111,7 @@ module.exports = function(el, bindings, state, opts) {
             state.down.emit(binding)
           else
             state.up.emit(binding)
+          state.changed.emit(binding, on_or_off)
         }
       }
     }
