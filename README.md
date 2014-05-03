@@ -1,5 +1,14 @@
 # kb-bindings
 
+**kb-bindings is now deprecated in favor of the following modules:**
+
+* **[kb-controls](https://github.com/chrisdickinson/kb-controls) 0.2.0+ (includes configurable `bindings` map)**
+* **[voxel-keys](https://github.com/deathcap/voxel-keys) (includes key events)**
+
+
+original readme below:
+---
+
 Expose a polling object and edge-triggered events for (game) keybindings using [vkey](https://github.com/chrisdickinson/vkey/) definitions.
 Can be configured in a GUI using the [kb-bindings-ui](https://github.com/deathcap/kb-bindings-ui) module.
 
